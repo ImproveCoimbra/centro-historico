@@ -1,0 +1,35 @@
+<h2>Edifícios</h2>
+
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>Propriedade</th>
+    <th>Disponibilidade</th>
+    <th>Funções</th>
+    <th>Conservação</th>
+    <th>Comentários</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @buildings.each do |building| %>
+      <tr>
+        <td><%= building.property %></td>
+        <td><%= building.availability %></td>
+        <td><%= building.functions %></td>
+        <td><%= building.conservation %></td>
+        <td style="white-space: pre-wrap"><%= building.description %></td>
+        <td><%= link_to 'Mais informações', building %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo edifício', new_building_path, :class => 'btn btn-danger' %>
+
+<br><br>
+
+<%= gmaps4rails(@buildings.to_gmaps4rails) %>

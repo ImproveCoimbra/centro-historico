@@ -1,0 +1,4 @@
+/* Gmaps4rails + Bootstrap controllers fix */
+
+#map img { max-width: none; }
+#map label { width: auto; display:inline; }

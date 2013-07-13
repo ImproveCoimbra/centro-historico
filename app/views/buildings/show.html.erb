@@ -1,0 +1,93 @@
+<% content_for :description do @building.description end %>
+
+<% content_for :building_image do
+  if !@building.photos.blank?
+    @building.photos[0].attachment.url(:medium)
+  end
+end %>
+
+<h2>Edifício</h2>
+
+<div id="building" class="row-fluid">
+  <div class="span6 offset3">
+
+    <% if notice %>
+      <p id="notice" class="alert alert-info"><%= notice %></p>
+    <% end %>
+
+    <dl>
+
+      <dt>Propriedade:</dt>
+      <dd><%= @building.property %></dd>
+
+      <dt>Disponibilidade:</dt>
+      <dd><%= @building.availability %></dd>
+
+      <dt>Funções:</dt>
+      <dd><%= @building.functions %></dd>
+
+      <dt>Conservação:</dt>
+      <dd><%= @building.conservation %></dd>
+
+      <dt>Comentários:</dt>
+      <dd style="white-space: pre-wrap"><%= @building.description %></dd>
+      <dt>Criado em: </dt><dd><%= @building.created_at.strftime('%Y-%m-%d %H:%M') %></dd>
+      <dt>Localização:</dt>
+      <dd>
+        <%= gmaps({
+            :map_options => { :auto_zoom => false,
+                              :zoom => 15,
+
+                              :raw => '{
+                              styles: myStyle,
+                              disableDefaultUI: true,
+                              mapTypeControl: true,
+                              zoomControl: true,
+                              zoomControlOptions: {
+                                    style: google.maps.ZoomControlStyle.SMALL
+                              },
+                              draggable: false
+                              }' },
+            :markers     => { 'data' => @building.to_gmaps4rails },
+          })
+        %>
+        <br/>
+     <!--   <small><%= @building.coordinates %></small> -->
+      </dd>
+    </dl>
+<% if !@building.photos.blank? %>
+    <h3><%= t(:photo).pluralize(2) %>:</h3>
+
+    <ul class="thumbnails">
+      <% @building.photos.each do |p| %>
+          <li class="span3">
+            <a href="#full_image<%= p.attachment.url(:large).hash %>" data-toggle="lightbox" class="thumbnail">
+              <%= image_tag p.attachment.url(:medium) %>
+            </a>
+          </li>
+          <div id="full_image<%= p.attachment.url(:large).hash %>" class="lightbox hide fade" tabindex="-1" role="dialog">
+            <div class='lightbox-header'>
+              <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+            </div>
+            <div class='lightbox-content'>
+              <%= image_tag p.attachment.url(:large) %>
+            </div>
+          </div>
+
+      <% end %>
+    </ul>
+
+<% end %>
+
+    <p>
+
+    <div class="fb-comments" class="row-fluid" data-href="http://<%= request.host+request.fullpath %>" data-num-posts="10">
+    </div>
+
+    <br/>
+    <a href="javascript:history.back()" class="btn">« Voltar</a>
+    </p>
+
+
+  </div>
+</div>

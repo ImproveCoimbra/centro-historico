@@ -1,0 +1,8 @@
+db/*
+log/*
+tmp/**/*
+.project
+Thumbs.db
+.bundle
+.DS_Store
+.ruby-version

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t(:app_name) %></title>
+  <meta name="description" content="<%= t(:app_description) %>">
+  <meta name="keywords" content="coimbra,centro,histórico,edifícios">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+
+  <meta property="og:title" content="<%= t(:app_name) %> - <%= t(:app_description) %>"/>
+  <meta property="og:description" content="<% if content_for? :description %><%= yield :description %><% else %><%= t(:app_description) %><% end %>"/>
+  <meta property="og:image" content="<% if content_for? :building_image %><%= yield :building_image %><% else %><%= image_url('handheld.jpg') %><% end %>"/>
+  <meta property="og:url" content="http://<%= request.host+request.fullpath %>"/>
+  <meta property="og:type" content="website"/>
+
+  <link rel="icon" type="image/png" href="<%= image_path('/img/favicon.png') %>">
+  <link rel="apple-touch-icon-precomposed" href="<%= image_path('/img/b-medium.png') %>" />
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<% if Rails.env == 'production' %>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '<%= ENV["GOOGLE_ANALYTICS_ID"] %>']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+<% end %>
+
+<% if content_for? :contents %>
+    <%= yield :contents %>
+<% else %>
+    <header>
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span12">
+            <h1><a href="/"><%= t(:app_name) %></a></h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<footer>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <p><%= link_to 'Sobre', :controller => :front, :action => 'about' %> |
+          <a href="http://improve.madeincoimbra.org">Made in Improve Coimbra</a> | Partilha
+        <span class="fb-like"
+             data-href="http://www.facebook.com/pages/No-meu-Bairro/510598865669972"
+             data-send="false"
+             data-layout="button_count"
+             data-width="450"
+             data-show-faces="false"
+             data-font="lucida grande">
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<%= javascript_include_tag 'application' %>
+<%= yield :scripts %>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<div id="faq" class="container-fluid">
+  <div class="row-fluid">
+    <div class="span8 offset2">
+
+      <h2><%= t(:extended_faq_title) %></h2>
+      <dl id="faq_list">
+        <dt>
+          Quem criou e é responsável por este site?
+        </dt>
+        <dd>
+
+          O <em>No meu Bairro</em> foi criado por um grupo de pessoas que se juntou com o objectivo de usar as suas
+          capacidades,
+          conhecimentos e trabalho para ajudar a melhorar a cidade de Coimbra. É um grupo de pessoas da sociedade
+          civíl sem
+          ligações partidárias que desenvolve este site durante o
+          <a href="http://improve.madeincoimbra.org">Improve Coimbra</a> e nas suas horas vagas.
+
+        </dd>
+
+        <dt>
+          O que acontece depois de um problema ser reportado?
+
+        </dt>
+        <dd>
+          Depois de reportado tentamos que a informação chegue a quem a possa avaliar e eventualmente resolver. Neste
+          momento isso apenas acontece em Coimbra em que a informação é enviada para a Câmara Municipal. Temos como
+          objectivo expandir para outras cidades, se achares que podes auxiliar nessa expansão não hesites em nos
+          <a href="#" id="email_a">contactar</a>.
+
+
+        </dd>
+
+        <dt>
+          Porque nos é pedido um endereço de correio electrónico?
+        </dt>
+        <dd>
+          Ao fim de 15 dias de um problema ser reportado ele será automaticamente marcado como resolvido. Isto serve
+          para que os problemas não fiquem para sempre abertos, mesmo depois de terem sido resolvidos. <br/>
+          Nos casos em que tenhas incluido um endereço de correio electrónico iremos te enviar uma notificação quando
+          estivermos prestes a marcar o problema como resolvido. Assim poderás, se necessário, extender o tempo de vida
+          do problema e assim não o iremos fechar.
+
+        </dd>
+
+
+        <dt>
+          Mas isso faz com que eu tenha de periodicamente ir ao site marcar um a um os problemas como ainda estando por
+          resolver. Não conseguem tornar este processo mais simples?
+        </dt>
+        <dd>
+          Simplificar este processo e melhorar o site faz parte dos nossos objectivos e poderemos pegar nisto em breve.
+          Mas ainda melhor seria se te juntasses a nós numa próxima edição do
+          <a href="http://improve.madeincoimbra.org">Improve Coimbra</a> e viesses melhorar este
+          e outros projectos.
+        </dd>
+
+
+      </dl>
+
+      <p class="actions">
+        <a href="javascript:history.back()" class="btn">« <%= t(:back) %></a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            s3 = "@gmail.com";
+            s2 = "bairro.app";
+            s1 = "mai" + "lto" + ":";
+            $("#email_a").attr("hr" + "ef", s1 + s2 + s3);
+        });
+    </script>
+<% end %>

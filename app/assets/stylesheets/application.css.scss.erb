@@ -1,0 +1,191 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree ./lib
+ *= require_self
+ *= require_tree .
+ */
+
+$main_color: #FF6600;
+$main_color_light: #FF6600;
+$background_color: #FFF2AF;
+
+body {
+}
+
+h1, h2 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-align: center;
+}
+
+h1, h1 a {
+  color: $main_color;
+}
+
+h2 {
+  font-size: 50px;
+  line-height: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+em {
+  font-style: normal;
+  font-weight: bold;
+  color: $main_color;
+}
+
+header {
+  background-color: $background_color;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.3);
+  h1 {
+    font-size: 32px;
+    a:hover, a:active, a:visited {
+      color: $main_color;
+    }
+  }
+}
+
+#home {
+  header {
+    padding: 40px 0;
+    h1 {
+      font-size: 80px;
+      line-height: 80px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 31.5px;
+      line-height: 40px;
+      margin-bottom: 20px;
+    }
+    .visible-desktop h6 {
+      margin-bottom: 0px;
+
+      a       { color: $main_color_light; }
+      a:hover { color: $main_color; }
+    }
+
+    .modal.full-image {
+      max-width: 630px;
+      max-height: 630px;
+
+      button {
+        position: absolute;
+        right: 6px;
+      }
+      img {
+        height: 630px;
+        width:  630px;
+        max-height: 630px;
+        max-width: 630px;
+      }
+    }
+
+    .modal.modal-fluid {
+      margin-left: 0px;
+    }
+  }
+
+  #map {
+    width: 100%;
+    height: 300px;
+  }
+
+  .map_container {
+    width: 100%;
+  }
+
+}
+
+#about {
+  p {
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    &.actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+}
+
+
+#faq {
+    dt,dd {
+        font-size: 22px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+    dt {
+        margin-top: 35px;
+    }
+}
+
+#building {
+  dd {
+    margin-bottom: 20px;
+  }
+  .map_container {
+    height: 300px;
+    #map {
+      height: 100%;
+    }
+  }
+}
+
+.status_message, .help-inline {
+  color: #999;
+}
+
+footer {
+  padding: 10px 0;
+  text-align: center;
+  a, a:hover, a:visited, a:active {
+    color: gray;
+  }
+  p {
+    margin: 5px 0px;
+  }
+}
+
+// Responsive
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 35px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  #home {
+    header {
+      h1 {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 25px;
+        line-height: 30px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+}
+
+.fb-comments, .fb-comments * {
+    width:100% !important;
+}

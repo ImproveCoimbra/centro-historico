@@ -1,0 +1,10 @@
+<% if pf.object.new_record? %>
+  <%#= pf.label :attachment %>
+  <%= pf.file_field :attachment, :accept => 'image/*', :capture => 'camera' %>
+<% else %>
+  <%#= pf.label :attachment %>
+  <%= image_tag pf.object.attachment.url(:thumb) %>
+  <%= pf.label :_destroy, 'Remover' %>
+  <%= pf.check_box :_destroy %>
+<% end %>
+<br>
