@@ -10,6 +10,9 @@ if ($('form#new_building').length > 0) {
     location_not_found_message = $("#location_not_found_message");
     map_container = $("#building");
 }
+if ($('form#edit_building').length > 0) {
+    $("#building").show();
+}
 
 function findLocation() {
     loading_location_message.show(500);

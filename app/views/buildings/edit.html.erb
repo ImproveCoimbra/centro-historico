@@ -1,40 +1,9 @@
-<h2><%= t(:edit_building) %></h2>
+<h2>Editar edifício</h2>
 
-<div id="building" class="row-fluid">
+<div class="row-fluid">
   <div class="span6 offset3">
 
-
-    <dl>
-      <dt>Descrição:</dt>
-      <dd><%= @building.description %></dd>
-      <dt><%= t(:location) %></dt>
-      <dd>
-        <%= gmaps({
-                          :map_options => {:auto_zoom => false, :zoom => 15, :raw => '{styles: myStyle}'},
-                          :markers => {'data' => @building.to_gmaps4rails},
-                  })
-        %>
-        <br/>
-        <!--   <small><%= @building.coordinates %></small> -->
-      </dd>
-    </dl>
-
-
-    <div class="form-actions">
-      <%= form_for(@building, :html => {:multipart => true, :class => 'form-horizontal'}) do |f| %>
-
-          <%= f.hidden_field :token %>
-          <%= f.submit t(:mark_as_solved), :class => 'btn btn-success btn-large' if @building.closure_date == nil %>
-      <% end %>
-      <%= form_for(@building, :url=> extend_building_path(@building), :html => {:multipart => true, :class => 'form-horizontal'}) do |f| %>
-
-          <%= f.hidden_field :token %>
-          <%= f.submit t(:extend_time), :class => 'btn btn-warning btn-large' if @building.closure_date == nil %>
-
-      <% end %>
-      <%= link_to t(:back), :back, :class => 'btn' %>
-    </div>
-
+    <%= render 'form' %>
 
   </div>
 </div>

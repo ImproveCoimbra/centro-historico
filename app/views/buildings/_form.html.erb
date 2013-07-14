@@ -1,4 +1,4 @@
-<%= form_for(@building, :html => { :multipart => true, :class => 'form-horizontal' }) do |f| %>
+<%= form_for(@building, :html => { :multipart => true, :class => 'form-horizontal', :id => @building.new_record? ? 'new_building' : 'edit_building' }) do |f| %>
 
     <% if @building.errors.any? %>
         <div id="error_explanation" class="alert alert-error">
@@ -11,33 +11,37 @@
         </div>
     <% end %>
 
-    <div class="control-group" id="photos-div">
-      <%= f.label :photos, 'Fotos', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.fields_for :photos do |photo_builder| %>
-          <%= render 'photo_fields', :pf => photo_builder %>
-        <% end %>
-        <br/><%= link_to_add_fields 'Adicionar outra foto', f, :photos %>
+    <% if @building.new_record? %>
+      <div class="control-group" id="photos-div">
+        <%= f.label :photos, 'Fotos', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.fields_for :photos do |photo_builder| %>
+            <%= render 'photo_fields', :pf => photo_builder %>
+          <% end %>
+          <br/><%= link_to_add_fields 'Adicionar outra foto', f, :photos %>
+        </div>
       </div>
-    </div>
-    <div class="control-group" id="no-photos-div" style="display: none">
-      <%= f.label :photos, 'Fotos', :class => 'control-label' %>
-      <div class="controls">
-        <%= t :no_browser_support_for_image_upload %>
+
+      <div class="control-group" id="no-photos-div" style="display: none">
+        <%= f.label :photos, 'Fotos', :class => 'control-label' %>
+        <div class="controls">
+          <%= t :no_browser_support_for_image_upload %>
+        </div>
       </div>
-    </div>
+
+    <% end %>
 
     <div class="control-group">
       <%= f.label :property, 'Propriedade', :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :property, options_for_select([nil]+Building::PROPERTY_VALUES) %>
+        <%= f.select :property, options_for_select([nil]+Building::PROPERTY_VALUES, @building.property) %>
       </div>
     </div>
 
     <div class="control-group">
       <%= f.label :availability, 'Disponibilidade', :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :availability, options_for_select([nil]+Building::AVAILABILITY_VALUES) %>
+        <%= f.select :availability, options_for_select([nil]+Building::AVAILABILITY_VALUES, @building.availability) %>
       </div>
     </div>
 
@@ -45,7 +49,9 @@
       <%= f.label :functions, 'Funções', :class => 'control-label' %>
       <div class="controls">
         <% for function in Building::FUNCTIONS_VALUES %>
-          <%= check_box_tag 'building[functions][]', function %> <%= function %> <br/>
+        <label class="checkbox">
+          <%= check_box_tag 'building[functions][]', function, @building.functions && @building.functions.include?(function) %> <%= function %>
+        </label>
         <% end %>
       </div>
     </div>
@@ -53,7 +59,7 @@
     <div class="control-group">
       <%= f.label :conservation, 'Conservação', :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :conservation, options_for_select([nil]+Building::CONSERVATION_VALUES) %>
+        <%= f.select :conservation, options_for_select([nil]+Building::CONSERVATION_VALUES, @building.conservation) %>
       </div>
     </div>
 
@@ -64,18 +70,17 @@
       </div>
     </div>
 
-
     <p>
-    <div class="status_message" id="loading_location_message"  style="display: none">
-      <%= image_tag 'ajax-loader.gif' %>
-      A obter localização
-    </div>
-    <div class="status_message" id="location_found_message"  style="display: none">Nota: A sua localização foi recolhida automaticamente. Pode usar o marcador seguinte para corrigir a posição.</div>
-    <div class="status_message" id="location_not_found_message" style="display: none">
-      Não foi possível validar a localização. Verifique as definições do seu browser. Pode em alternativa usar o mapa seguinte e marcar a sua posição.
-      <%= link_to_function t(:retry_location) ,'findLocation()', :class => 'btn' %>
-    </div>
-
+      <span class="status_message" id="loading_location_message"  style="display: none">
+        <%= image_tag 'ajax-loader.gif' %>
+        A obter localização
+      </span>
+      <span class="status_message" id="location_found_message"  style="display: none">Nota: A sua localização foi recolhida automaticamente. Pode usar o marcador seguinte para corrigir a posição.</span>
+      <span class="status_message" id="location_not_found_message" style="display: none">
+        Não foi possível validar a localização. Verifique as definições do seu browser. Pode em alternativa usar o mapa seguinte e marcar a sua posição.
+        <%= link_to_function 'Voltar a obter localização', 'findLocation()', :class => 'btn' %>
+      </span>
+    </p>
 
     <div id="building" class="control-group" style="display: none">
       <%= gmaps({
@@ -159,12 +164,13 @@
     <% content_for :scripts do %>
         <script type="text/javascript">
             function send_building() {
-                $("#new_building").children().hide();
+                $("#new_building, #edit_building").children().hide();
                 $("#submit-in-progress").show();
-                $("#new_building").submit();
+                $("#new_building, #edit_building").submit();
             }
         </script>
     <% end %>
+
     <div id="submit-form-actions" class="form-actions">
       <%= link_to 'Voltar', root_path, :class => 'btn btn-large' %>
       <%= link_to_function 'Enviar', 'send_building()' ,:class => 'btn btn-success btn-large' %>

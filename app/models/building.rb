@@ -33,7 +33,7 @@ class Building
   acts_as_gmappable :process_geocoding => false
 
   # Callbacks
-  before_create :convert_location
+  before_save :convert_location
 
   scope :coimbra, where(:coordinates => {'$within' => {'$box' => [[-8.921616737389286, 40.10956171052814], [-8.343146888756473, 40.2397146010789] ]}})
 
@@ -57,6 +57,16 @@ class Building
     self[:functions].try(:join, ', ')
   end
 
+  def functions=(items)
+    if items.is_a? Array
+      self[:functions] = items
+    elsif items.is_a? String and items.present?
+      self[:functions] = items.split(',').map(&:strip).reject(&:blank?)
+    else
+      self[:functions] = []
+    end
+  end
+
   # Methods
   def as_json(ctx)
     super(:include => {:photos => {:only => [:_id], :methods => :styles}}, :except => [:client_ip])
@@ -76,19 +86,22 @@ class Building
   end
 
   def gmaps4rails_marker_picture
-    if property == 'público'
-      {
-          :picture => 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-          :width => 32,
-          :height => 32
-      }
-    else
-      {
-          :picture => 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-          :width => 32,
-          :height => 32
-      }
+    {
+      :picture => gmaps4rails_marker_icon,
+      :width => 32,
+      :height => 32
+    }
+  end
+
+  def gmaps4rails_marker_icon
+    filename = case conservation
+    when 'ruína'     then 'dot-red.png'
+    when 'devoluto'  then 'dot-orange.png'
+    when 'aceitável' then 'dot-yellow.png'
+    when 'bom'       then 'dot-green.png'
+    else                  'dot-gray.png'
     end
+    ActionController::Base.helpers.asset_path filename
   end
 
 end

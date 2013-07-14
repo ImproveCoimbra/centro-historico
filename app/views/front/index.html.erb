@@ -8,44 +8,40 @@
         <div class="span12">
           <h1><%= t(:app_name) %></h1>
           <h2><%= t(:app_description) %></h2>
-          <a href="/buildings/new" class="btn btn-large btn-danger">Novo edifício</a>
-
-          <div class="visible-desktop">
-            <h6>
-              <a href="#mobile" data-toggle="modal"> Abra esta página no telemóvel </a>
-            </h6>
-          </div>
-
-          <div id="mobile" class="modal modal-fluid hide full-image">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <%= image_tag image_path('handheld.jpg') %>
-          </div>
-
+          <!--
+            <a href="/buildings/new" class="btn btn-large btn-danger">Novo edifício</a>
+            <div class="visible-desktop">
+              <h6>
+                <a href="#mobile" data-toggle="modal"> Abra esta página no telemóvel </a>
+              </h6>
+            </div>
+            <div id="mobile" class="modal modal-fluid hide full-image">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <%= image_tag image_path('handheld.jpg') %>
+            </div>
+          -->
         </div>
       </div>
     </div>
   </header>
 
-  <%= gmaps(:markers =>
-                    {
-                            :data => [],
-                            :options =>
-                                    {
-                                            :randomize => true,
-                                            :max_random_distance => 1
-                                    }
-                    },
-            :map_options =>
-                    {
-                            :container_class => 'map-container hidden-phone',
-                            :raw => '{styles: myStyle}',
-                            #TODO Read from configuration somewhere
-                            :language => 'pt', :hl => 'pt', :region => 'pt',
-                            :center_latitude => 40.20119879996395,
-                            :center_longitude => -8.426894545555115,
-                            :zoom => 13
-                    }) %>
-
+  <%= gmaps(
+    :markers => {
+      :data => [],
+      :options => {
+        :randomize => true,
+        :max_random_distance => 1
+      }
+    },
+    :map_options => {
+      :container_class => 'map-container',
+      :raw => '{styles: myStyle}',
+      :language => 'pt', :hl => 'pt', :region => 'pt',
+      :center_latitude => 40.209688,
+      :center_longitude => -8.426235,
+      :zoom => 16
+    }
+  ) %>
 
 </div>
 

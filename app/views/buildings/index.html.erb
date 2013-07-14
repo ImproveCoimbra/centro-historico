@@ -3,6 +3,7 @@
 <table class="table table-bordered table-hover">
   <thead>
   <tr>
+    <th>Data</th>
     <th>Propriedade</th>
     <th>Disponibilidade</th>
     <th>Funções</th>
@@ -15,12 +16,15 @@
   <tbody>
   <% @buildings.each do |building| %>
       <tr>
+        <td><%= building.created_at %></td>
         <td><%= building.property %></td>
         <td><%= building.availability %></td>
         <td><%= building.functions %></td>
         <td><%= building.conservation %></td>
         <td style="white-space: pre-wrap"><%= building.description %></td>
         <td><%= link_to 'Mais informações', building %></td>
+        <td><%= link_to 'Editar', edit_building_path(building) %></td>
+        <td><%= link_to 'Remover', building, :method => :delete, :confirm => 'Tem a certeza que quer remover este edifício?' %></td>
       </tr>
   <% end %>
   </tbody>

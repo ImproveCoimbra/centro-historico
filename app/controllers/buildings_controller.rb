@@ -1,6 +1,9 @@
 # encoding: UTF-8
 
 class BuildingsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show]
+
   # GET /buildings
   # GET /buildings?mine=true
   # GET /buildings.json
@@ -25,7 +28,7 @@ class BuildingsController < ApplicationController
       format.html # index.html.erb
       format.json {
         @buildings = @buildings.to_gmaps4rails do |building, marker|
-          marker.title building.property.try(:capitalize)
+          marker.title building.conservation
           marker.json({:link => building_url(building)})
         end
         render json: @buildings
@@ -80,24 +83,29 @@ class BuildingsController < ApplicationController
     end
   end
 
-  # GET /buildings/1/edit?token=ABCDE
+  # GET /buildings/1/edit
   def edit
-    @building = Report.find_by(:id => params[:id])
+    @building = Building.find_by(:id => params[:id])
   end
 
   # PUT /buildings/1
   # PUT /buildings/1.json
   def update
     @building = Building.find_by(:id => params[:id])
-    @building.save
     respond_to do |format|
-      if @building.save
-        format.html { redirect_to @building, notice: t(:update_report) }
+      if @building.update_attributes(params[:building])
+        format.html { redirect_to @building, notice: 'Edifício actualizado' }
         format.json { render json: @building.errors, status: :unprocessable_entity }
       else
-        # TODO
+        render :edit
       end
     end
+  end
+
+  def destroy
+    @building = Building.find_by(:id => params[:id])
+    @building.destroy
+    redirect_to :action => 'index'
   end
 
 end
