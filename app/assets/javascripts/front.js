@@ -30,6 +30,8 @@ jQuery(function ($) {
 
   // Gmaps4Rails update markers based on window
     function updateMarkers() {
+        Gmaps.map.map.setTilt(0);
+
         //Gmaps.map.adjustMapToBounds();
         var bounds= Gmaps.map.map.getBounds();
 
