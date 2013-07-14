@@ -29,6 +29,9 @@ end %>
       <dt>Conservação:</dt>
       <dd><%= @building.conservation %></dd>
 
+      <dt>Link:</dt>
+      <dd><%= link_to @building.link, @building.link %></dd>
+
       <dt>Comentários:</dt>
       <dd style="white-space: pre-wrap"><%= @building.description %></dd>
       <dt>Criado em: </dt><dd><%= @building.created_at.strftime('%Y-%m-%d %H:%M') %></dd>
