@@ -88,8 +88,8 @@ class Building
   def gmaps4rails_marker_picture
     {
       :picture => gmaps4rails_marker_icon,
-      :width => 32,
-      :height => 32
+      :width => 7,
+      :height => 7
     }
   end
 
