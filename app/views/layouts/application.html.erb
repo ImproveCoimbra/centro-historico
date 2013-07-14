@@ -10,7 +10,7 @@
 
   <meta property="og:title" content="<%= t(:app_name) %> - <%= t(:app_description) %>"/>
   <meta property="og:description" content="<% if content_for? :description %><%= yield :description %><% else %><%= t(:app_description) %><% end %>"/>
-  <meta property="og:image" content="<% if content_for? :building_image %><%= yield :building_image %><% else %><%= image_url('handheld.jpg') %><% end %>"/>
+  <meta property="og:image" content="<% if content_for? :building_image %><%= yield :building_image %><% end %>"/>
   <meta property="og:url" content="http://<%= request.host+request.fullpath %>"/>
   <meta property="og:type" content="website"/>
 
