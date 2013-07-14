@@ -8,7 +8,7 @@ class Building
   PROPERTY_VALUES = %w(público privado)
   AVAILABILITY_VALUES = %w(venda arrendamento ocupado)
   CONSERVATION_VALUES = %w(ruína devoluto aceitável bom)
-  FUNCTIONS_VALUES = %w(armazenamento comércio habitação hotelaria restauração serviços)
+  FUNCTIONS_VALUES = %w(armazenamento comércio habitação hotelaria restauração serviços desocupado)
 
   field :property,     :type => String
   field :availability, :type => String
