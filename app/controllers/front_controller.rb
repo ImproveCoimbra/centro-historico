@@ -6,4 +6,7 @@ class FrontController < ApplicationController
   def about
   end
 
+  def resources
+  end
+
 end
