@@ -85,11 +85,30 @@ class Building
     coordinates[0] if coordinates
   end
 
+  def gmaps4rails_infowindow
+    content = ""
+    content += "<p><b>Propriedade:</b> #{property}</p>" if property.present?
+    content += "<p><b>Disponibilidade:</b> #{availability}</p>" if availability.present?
+    content += "<p><b>Funções:</b> #{functions}</p>" if functions.present?
+    content += "<p><b>Conservação:</b> #{conservation}</p>" if conservation.present?
+    content += "<p><b>Comentários:</b> #{description}</p>" if description.present?
+    content += "<p><b>Adicionado em:</b> #{created_at.strftime('%Y-%m-%d %H:%M')}</p>"
+    content += "<p><a href=\"#{link}\">Mais infomações</a></p>" if link.present?
+    if photos.any?
+      content += '<ul class="thumbnails">'
+      photos.each do |photo|
+        content += "<li><a href=\"#{photo.attachment.url(:original)}\" target=\"_blank\" class=\"thumbnail\"><img data-src=\"#{photo.attachment.url(:medium)}\"/></a></li>"
+      end
+      content += '</ul>'
+    end
+    "<div class=\"map-balloon\">#{content}</div>"
+  end
+
   def gmaps4rails_marker_picture
     {
       :picture => gmaps4rails_marker_icon,
-      :width => 7,
-      :height => 7
+      :width => 12,
+      :height => 12
     }
   end
 

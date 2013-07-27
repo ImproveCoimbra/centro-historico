@@ -1,0 +1,33 @@
+<% content_for :body do %>
+
+  <header>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <h1><a href="/"><%= t(:app_name) %></a></h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <p>
+            <%= link_to 'Sobre', about_url %> | <a href="http://improve.madeincoimbra.org">Made in Improve Coimbra</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<% end %>
+<%= render :file => 'layouts/application' %>

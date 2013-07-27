@@ -1,0 +1,19 @@
+<% content_for :body do %>
+
+  <div id="front">
+
+    <header id="front-sidebar">
+      <h1><a href="/"><%= t(:app_name) %></a></h1>
+      <p><%= t(:app_description) %></p>
+      <p><%= link_to 'Sobre', about_url %></p>
+      <p><a href="http://improvecoimbra.org">Made in Improve Coimbra</a><p>
+    </header>
+
+    <div id="front-contents">
+      <%= yield %>
+    </div>
+
+  </div>
+
+<% end %>
+<%= render :file => 'layouts/application' %>

@@ -4,7 +4,6 @@ class FrontController < ApplicationController
   end
 
   def about
-    render :layout => 'application'
   end
 
 end
