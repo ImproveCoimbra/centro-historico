@@ -50,6 +50,12 @@ jQuery(function ($) {
         google.maps.event.addListenerOnce(Gmaps.map.serviceObject, 'idle', updateMarkers);
 
         google.maps.event.addListener(Gmaps.map.serviceObject, 'bounds_changed', updateMarkers);
+
+        Gmaps.map.map.setOptions({
+            panControl: false,
+            zoomControl: true,
+            zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_BOTTOM}
+        });
       }
 
     }
