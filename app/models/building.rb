@@ -97,7 +97,7 @@ class Building
     if photos.any?
       content += '<ul class="thumbnails">'
       photos.each do |photo|
-        content += "<li><a href=\"#{photo.attachment.url(:original)}\" target=\"_blank\" class=\"thumbnail\"><img data-src=\"#{photo.attachment.url(:medium)}\"/></a></li>"
+        content += "<li><a href=\"#{photo.attachment.url(:original)}\" target=\"_blank\" class=\"thumbnail\"><img src=\"#{photo.attachment.url(:medium)}\"/></a></li>"
       end
       content += '</ul>'
     end
