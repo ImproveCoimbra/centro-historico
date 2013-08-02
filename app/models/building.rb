@@ -104,23 +104,41 @@ class Building
     "<div class=\"map-balloon\">#{content}</div>"
   end
 
-  def gmaps4rails_marker_picture
+  def picture(criteria = 'conservation')
     {
-      :picture => gmaps4rails_marker_icon,
+      :picture => icon(criteria),
       :width => 12,
       :height => 12
     }
   end
 
-  def gmaps4rails_marker_icon
-    filename = case conservation
-    when 'ruína'     then 'dot-red.png'
-    when 'devoluto'  then 'dot-orange.png'
-    when 'aceitável' then 'dot-yellow.png'
-    when 'bom'       then 'dot-green.png'
-    else                  'dot-gray.png'
+  def icon(criteria = 'conservation')
+
+    colors = {
+      'conservation' => {
+        'ruína'     => 'red',
+        'devoluto'  => 'orange',
+        'aceitável' => 'yellow',
+        'bom'       => 'green'
+      },
+      'property' => {
+        'público' => 'red',
+        'privado' => 'green',
+      },
+      'availability' => {
+        'venda'        => 'orange',
+        'arrendamento' => 'yellow',
+        'ocupado'      => 'red',
+      }
+    }
+
+    if colors[criteria] and colors[criteria][send(criteria)]
+      color = colors[criteria][send(criteria)]
+    else
+      color = 'gray'
     end
-    ActionController::Base.helpers.asset_path filename
+
+    ActionController::Base.helpers.asset_path "dot-#{color}.png"
   end
 
 end

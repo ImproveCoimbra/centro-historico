@@ -52,12 +52,9 @@ h2 {
 
   h1, h2, p {
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
-  p {
-    margin-bottom: 30px;
-  }
 
   #front-sidebar {
     position: absolute;
@@ -93,6 +90,38 @@ h2 {
       bottom: 0;
       left: 0;
       right: 0;
+    }
+
+  }
+
+  #criteria {
+    margin: 40px 0;
+
+    .accordion-group {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      border: none;
+
+      .accordion-heading {
+        background-color: #F6F6F6;
+        &:hover {
+          background-color: #EEE;
+        }
+      }
+
+      .accordion-heading .accordion-toggle, .accordion-body .accordion-inner {
+        padding: 10px 40px;
+      }
+
+      .accordion-inner {
+        border: none;
+        font-size: 14px;
+        img {
+          vertical-align: baseline;
+          margin-right: 5px;
+        }
+      }
     }
 
   }

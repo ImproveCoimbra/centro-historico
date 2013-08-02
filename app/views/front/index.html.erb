@@ -16,3 +16,56 @@
     :tilt => 0,
   }
 ) %>
+
+<% content_for :sidebar do %>
+
+  <div class="accordion" id="criteria">
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#criteria" href="#criteria-conservation">
+          Estado de Conservação
+        </a>
+      </div>
+      <div id="criteria-conservation" class="accordion-body collapse in" data-criteria="conservation">
+        <div class="accordion-inner">
+          <%= image_tag 'dot-green.png' %>Bom <br/>
+          <%= image_tag 'dot-yellow.png' %>Aceitável <br/>
+          <%= image_tag 'dot-orange.png' %>Devoluto <br/>
+          <%= image_tag 'dot-red.png' %>Ruína
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#criteria" href="#criteria-property">
+          Propriedade
+        </a>
+      </div>
+      <div id="criteria-property" class="accordion-body collapse" data-criteria="property">
+        <div class="accordion-inner">
+          <%= image_tag 'dot-red.png' %>Público <br/>
+          <%= image_tag 'dot-green.png' %>Privado
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#criteria" href="#criteria-availability">
+          Disponibilidade
+        </a>
+      </div>
+      <div id="criteria-availability" class="accordion-body collapse" data-criteria="availability">
+        <div class="accordion-inner">
+          <%= image_tag 'dot-orange.png' %>Venda <br/>
+          <%= image_tag 'dot-yellow.png' %>Arrendamento <br/>
+          <%= image_tag 'dot-red.png' %>Ocupado <br/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
