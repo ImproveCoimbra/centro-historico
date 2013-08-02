@@ -126,7 +126,7 @@ class Building
         'privado' => 'green',
       },
       'availability' => {
-        'venda'        => 'orange',
+        'venda'        => 'green',
         'arrendamento' => 'yellow',
         'ocupado'      => 'red',
       }

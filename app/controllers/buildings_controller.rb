@@ -29,7 +29,6 @@ class BuildingsController < ApplicationController
       format.json {
         criteria = (params[:criteria].present? ? params[:criteria] : 'conservation')
         @buildings = @buildings.to_gmaps4rails do |building, marker|
-          marker.title   building.conservation
           marker.picture building.picture(criteria)
           marker.json({:link => building_url(building)})
         end
