@@ -6,3 +6,6 @@ Thumbs.db
 .bundle
 .DS_Store
 .ruby-version
+
+config/mongoid.yml
+config/s3.yml
