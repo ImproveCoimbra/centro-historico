@@ -12,7 +12,7 @@ Este é um projecto desenvolvido no [Improve Coimbra](http://improvecoimbra.org)
 
 ## Desenvolvimento ##
 
-Informações importantes sobre esta aplicação/repositório.
+O desenvolvimento desta aplicação foi baseado no código fonte do projecto [No meu bairro](http://www.nomeubairro.pt).
 
 ### Tecnologias ###
 
