@@ -36,5 +36,5 @@ Para a execução desta aplicação em ambiente de produção é necessário def
 
 Para aceder à zona de administração em ambiente de desenvolvimento, os dados de acesso são:
 
-Username: improve
-Password: improve13
+* **Username:** improve
+* **Password:** improve13
